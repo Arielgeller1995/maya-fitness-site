@@ -213,6 +213,52 @@
     .trainer-bio p { font-size: 15px; color: #555; line-height: 1.8; margin-bottom: 16px; }
     .trainer-bio p strong { color: var(--black); }
 
+    /* ─── CONTACT FORM ───────────────────────── */
+    .contact { background: var(--cream); }
+    .contact-form-wrap {
+      max-width: 680px; margin: 0 auto;
+      background: #fff; border-radius: 24px;
+      padding: 52px 56px;
+      box-shadow: 0 8px 48px rgba(0,0,0,0.07);
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+    .form-group label { font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--black); }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 14px 18px; border: 1.5px solid rgba(0,0,0,0.12); border-radius: 12px;
+      font-family: 'Figtree', sans-serif; font-size: 15px; color: var(--black);
+      background: var(--cream); outline: none; transition: border-color 0.2s;
+      appearance: none; -webkit-appearance: none;
+    }
+    .form-group select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 16px center;
+      padding-right: 40px;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--rose); }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: #bbb; }
+    #referral-friend-wrap { display: none; }
+    .form-submit {
+      width: 100%; padding: 16px; border: none; border-radius: 50px;
+      background: var(--rose); color: #fff; font-family: 'Figtree', sans-serif;
+      font-size: 15px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      cursor: pointer; transition: background 0.2s; margin-top: 8px;
+    }
+    .form-submit:hover { background: var(--rose-dark); }
+    .form-success {
+      display: none; text-align: center; padding: 32px 0 8px;
+      font-size: 17px; color: var(--rose-dark); font-weight: 600;
+    }
+    @media (max-width: 768px) {
+      .contact-form-wrap { padding: 36px 24px; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+
     /* ─── FOOTER ─────────────────────────────── */
     footer { background: var(--black); color: #fff; padding: 60px 48px; }
     .footer-signup { text-align: center; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 40px; }
@@ -281,6 +327,7 @@
       <li><a href="#pricing">Pricing</a></li>
       <li><a href="#trainer">About</a></li>
       <li><a href="#testimonials">Results</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
     <button class="nav-cta" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Join Now</button>
     <button class="hamburger" onclick="document.querySelector('.mobile-menu').classList.add('open')" aria-label="Menu">
@@ -295,6 +342,7 @@
     <a href="#pricing" onclick="document.querySelector('.mobile-menu').classList.remove('open')">Pricing</a>
     <a href="#trainer" onclick="document.querySelector('.mobile-menu').classList.remove('open')">About</a>
     <a href="#testimonials" onclick="document.querySelector('.mobile-menu').classList.remove('open')">Results</a>
+    <a href="#contact" onclick="document.querySelector('.mobile-menu').classList.remove('open')">Contact</a>
   </div>
 
   <!-- HERO -->
@@ -498,6 +546,71 @@
     </div>
   </section>
 
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <h2 class="section-title">Get In Touch</h2>
+      <p class="section-subtitle">Fill in your details and Maya will reach out to get you started.</p>
+      <div class="contact-form-wrap">
+        <form id="contact-form" onsubmit="handleFormSubmit(event)" novalidate>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="full-name">Full Name</label>
+              <input type="text" id="full-name" name="full_name" placeholder="Jane Smith" required />
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" placeholder="+1 555 000 0000" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="jane@example.com" required />
+          </div>
+
+          <div class="form-group">
+            <label for="referral">How did you find me?</label>
+            <select id="referral" name="referral" onchange="toggleFriendField(this)" required>
+              <option value="" disabled selected>Select an option…</option>
+              <option value="instagram">Instagram</option>
+              <option value="tiktok">TikTok</option>
+              <option value="youtube">YouTube</option>
+              <option value="friend">A friend referred me</option>
+              <option value="google">Google / Search</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group" id="referral-friend-wrap">
+            <label for="friend-name">Friend's Name</label>
+            <input type="text" id="friend-name" name="friend_name" placeholder="Who referred you?" />
+          </div>
+
+          <div class="form-group">
+            <label for="goal">My main goal</label>
+            <select id="goal" name="goal" required>
+              <option value="" disabled selected>Select your goal…</option>
+              <option value="lose_weight">Lose weight / burn fat</option>
+              <option value="gain_muscle">Gain muscle &amp; strength</option>
+              <option value="recomp">Body recomposition (lose fat + build muscle)</option>
+              <option value="tone">Tone &amp; tighten up</option>
+              <option value="fitness">Improve overall fitness &amp; energy</option>
+              <option value="posture">Improve posture &amp; core strength</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <button type="submit" class="form-submit">SEND MY DETAILS</button>
+        </form>
+        <div class="form-success" id="form-success">
+          Thank you! Maya will be in touch with you shortly. 🌟
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- FOOTER -->
   <footer>
     <div class="footer-signup">
@@ -540,6 +653,16 @@
       document.getElementById('billing2').textContent = d.b2;
       document.getElementById('price3').innerHTML = d.p3;
       document.getElementById('billing3').textContent = d.b3;
+    }
+    function toggleFriendField(sel) {
+      document.getElementById('referral-friend-wrap').style.display =
+        sel.value === 'friend' ? 'flex' : 'none';
+    }
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      document.getElementById('contact-form').style.display = 'none';
+      document.getElementById('form-success').style.display = 'block';
     }
   </script>
 
