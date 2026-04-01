@@ -110,6 +110,59 @@
     }
     .feature-item p { font-size: 13px; font-weight: 600; line-height: 1.4; max-width: 120px; }
 
+    /* ─── APP ORBIT ────────────────────────────── */
+    .app-overview { background: #fff; padding: 100px 48px; overflow: visible; }
+    .ao-inner {
+      max-width: 1140px; margin: 0 auto;
+      display: grid; grid-template-columns: 600px 1fr;
+      gap: 40px; align-items: center;
+    }
+    .orbit-outer { width: 600px; height: 600px; position: relative; flex-shrink: 0; }
+    .orbit-wrap  { position: relative; width: 600px; height: 600px; }
+    .orbit-circle {
+      position: absolute;
+      width: 420px; height: 420px; border-radius: 50%;
+      left: 90px; top: 90px;
+      background: linear-gradient(135deg, #d4b5a0 0%, #8a6550 100%);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.65);
+      font-size: 13px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+      box-shadow: 0 8px 48px rgba(0,0,0,0.12);
+    }
+    .orbit-item {
+      position: absolute;
+      display: flex; align-items: center; gap: 10px;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--black); white-space: nowrap; z-index: 2;
+    }
+    .orbit-dot-el {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--black); flex-shrink: 0;
+    }
+    .oi-right { flex-direction: row; }
+    .oi-left  { flex-direction: row-reverse; }
+    .oi-top   { flex-direction: column; align-items: center; }
+    .ao-text  { padding-left: 20px; }
+    .ao-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(64px, 7vw, 96px);
+      line-height: 0.9; letter-spacing: 2px;
+      color: var(--black); margin-bottom: 24px;
+    }
+    .ao-sub {
+      font-size: 18px; color: #555; line-height: 1.7;
+      margin-bottom: 36px; max-width: 380px;
+    }
+    @media (max-width: 1100px) {
+      .ao-inner { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+      .ao-sub   { margin-left: auto; margin-right: auto; }
+      .ao-text  { padding-left: 0; }
+      .orbit-outer { height: 380px; }
+      .orbit-wrap  { transform: scale(0.63); transform-origin: top center; }
+      .app-overview { padding: 60px 24px; }
+    }
+
     /* ─── TRANSFORMATIONS ──────────────────────── */
     .transformations { background: var(--cream); text-align: center; }
     .transformations .section-title { color: var(--black); font-size: clamp(40px, 6vw, 72px); line-height: 1; margin-bottom: 48px; }
@@ -393,6 +446,69 @@
           <p>private members community</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- APP OVERVIEW -->
+  <section class="app-overview">
+    <div class="ao-inner">
+
+      <!-- Left: Circle with orbit labels -->
+      <div class="orbit-outer">
+        <div class="orbit-wrap">
+          <div class="orbit-circle">[ Maya Photo ]</div>
+
+          <!-- 1. meal plan – top (0°) -->
+          <div class="orbit-item oi-top" style="bottom:506px;left:300px;transform:translateX(-50%);">
+            <span>meal plan</span>
+            <span class="orbit-dot-el"></span>
+          </div>
+
+          <!-- 2. community group – top right (51°) -->
+          <div class="orbit-item oi-right" style="left:460px;top:162px;">
+            <span class="orbit-dot-el"></span>
+            <span>community group</span>
+          </div>
+
+          <!-- 3. period tracker – right (103°) -->
+          <div class="orbit-item oi-right" style="left:501px;top:340px;">
+            <span class="orbit-dot-el"></span>
+            <span>period tracker</span>
+          </div>
+
+          <!-- 4. food diary – bottom right (154°) -->
+          <div class="orbit-item oi-right" style="left:387px;top:482px;">
+            <span class="orbit-dot-el"></span>
+            <span>food diary</span>
+          </div>
+
+          <!-- 5. habit tracker – bottom left (206°) -->
+          <div class="orbit-item oi-left" style="right:387px;top:482px;">
+            <span class="orbit-dot-el"></span>
+            <span>habit tracker</span>
+          </div>
+
+          <!-- 6. progress tracker – left (257°) -->
+          <div class="orbit-item oi-left" style="right:501px;top:340px;">
+            <span class="orbit-dot-el"></span>
+            <span>progress tracker</span>
+          </div>
+
+          <!-- 7. workout program – top left (309°) -->
+          <div class="orbit-item oi-left" style="right:460px;top:162px;">
+            <span class="orbit-dot-el"></span>
+            <span>workout program</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Text + CTA -->
+      <div class="ao-text">
+        <h2 class="ao-heading">EVERYTHING</h2>
+        <p class="ao-sub">you'll need for the transformation of a lifetime, bundled together in one app.</p>
+        <a href="#pricing" class="btn-pill btn-rose" style="display:inline-block;text-decoration:none;color:#fff;">CHANGE MY LIFE</a>
+      </div>
+
     </div>
   </section>
 
