@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maya Fitness | Your Dream Body Starts Here</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Figtree:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #f5f0eb;
+      --rose: #c4937a;
+      --rose-dark: #a8755d;
+      --black: #1a1a1a;
+      --gray: #888;
+      --light: #fff;
+      --card-bg: #faf7f4;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Figtree', sans-serif; color: var(--black); background: var(--cream); }
+
+    /* ─── NAV ─────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 48px;
+      background: rgba(245,240,235,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      transition: background 0.3s;
+    }
+    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 2px; color: var(--black); text-decoration: none; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--black); font-size: 13px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--rose); }
+    .nav-cta { background: var(--rose); color: #fff; border: none; padding: 10px 24px; border-radius: 50px; font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
+    .nav-cta:hover { background: var(--rose-dark); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; }
+    .hamburger span { width: 24px; height: 2px; background: var(--black); display: block; transition: 0.3s; }
+
+    /* ─── HERO ─────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      background: #5a3d2b url('hero-placeholder.jpg') center/cover no-repeat;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 120px 24px 60px;
+      position: relative;
+    }
+    .hero::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.35) 100%);
+    }
+    .hero-inner { position: relative; z-index: 1; max-width: 800px; }
+    .hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(64px, 10vw, 120px);
+      line-height: 0.95;
+      color: #fff;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+      margin-bottom: 20px;
+    }
+    .hero p {
+      font-style: italic; font-size: clamp(16px, 2.5vw, 22px);
+      color: rgba(255,255,255,0.92); margin-bottom: 36px;
+      font-weight: 400;
+    }
+    .btn-pill {
+      display: inline-block; padding: 16px 40px;
+      border: 2px solid rgba(255,255,255,0.85);
+      border-radius: 50px; color: #fff;
+      font-size: 13px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; text-decoration: none;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(4px);
+      transition: all 0.25s; cursor: pointer;
+    }
+    .btn-pill:hover { background: rgba(255,255,255,0.25); border-color: #fff; }
+    .btn-rose { background: var(--rose); border: 2px solid var(--rose); color: #fff; }
+    .btn-rose:hover { background: var(--rose-dark); border-color: var(--rose-dark); }
+
+    /* ─── SECTION BASICS ───────────────────────── */
+    section { padding: 80px 48px; }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(36px, 5vw, 56px);
+      letter-spacing: 1px; text-align: center;
+      color: var(--rose-dark); margin-bottom: 12px;
+    }
+    .section-subtitle { text-align: center; color: var(--gray); font-size: 16px; margin-bottom: 56px; }
+    .container { max-width: 1140px; margin: 0 auto; }
+
+    /* ─── WHATS INCLUDED ───────────────────────── */
+    .included { background: #fff; }
+    .included-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; max-width: 1140px; margin: 0 auto; }
+    .app-mockup {
+      background: #e8e2db; border-radius: 24px;
+      height: 420px; display: flex; align-items: center; justify-content: center;
+      font-size: 14px; color: var(--gray); font-weight: 600; letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+    .feature-item { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px; }
+    .feature-icon {
+      width: 60px; height: 60px; border-radius: 50%;
+      border: 2px solid var(--black); display: flex; align-items: center; justify-content: center;
+      font-size: 24px;
+    }
+    .feature-item p { font-size: 13px; font-weight: 600; line-height: 1.4; max-width: 120px; }
+
+    /* ─── TRANSFORMATIONS ──────────────────────── */
+    .transformations { background: var(--cream); text-align: center; }
+    .transformations .section-title { color: var(--black); font-size: clamp(40px, 6vw, 72px); line-height: 1; margin-bottom: 48px; }
+    .before-after-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1000px; margin: 0 auto 16px; }
+    .ba-photo {
+      background: #d5cdc5; border-radius: 12px;
+      aspect-ratio: 3/4; display: flex; align-items: center; justify-content: center;
+      font-size: 12px; color: var(--gray); font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+    }
+    .carousel-dots { display: flex; justify-content: center; gap: 8px; margin: 16px 0 32px; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: #ccc; transition: background 0.2s; }
+    .dot.active { background: var(--black); }
+    .phone-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 900px; margin: 40px auto 0; }
+    .phone-card {
+      background: var(--black); border-radius: 32px; overflow: hidden;
+      aspect-ratio: 9/16; display: flex; align-items: center; justify-content: center;
+      font-size: 12px; color: rgba(255,255,255,0.4); font-weight: 600;
+      text-transform: uppercase; letter-spacing: 1px; position: relative;
+    }
+    .phone-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(135deg, #3a3a3a 0%, #1a1a1a 100%);
+    }
+    .phone-card span { position: relative; z-index: 1; }
+
+    /* ─── WHO IS THIS FOR ───────────────────────── */
+    .who { background: #fff; }
+    .who-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1000px; margin: 0 auto; }
+    .who-card {
+      background: var(--card-bg); border-radius: 20px;
+      padding: 40px 32px; text-align: center;
+      border: 1px solid rgba(0,0,0,0.06);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .who-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+    .who-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 1px; margin-bottom: 14px; color: var(--rose-dark); }
+    .who-card p { font-size: 15px; color: #555; line-height: 1.7; }
+    .who-card p strong { color: var(--black); }
+
+    /* ─── PRICING ───────────────────────────────── */
+    .pricing { background: var(--cream); }
+    .currency-tabs { display: flex; justify-content: center; gap: 4px; margin-bottom: 48px; }
+    .currency-btn {
+      padding: 8px 20px; border-radius: 50px; border: 1px solid #ccc;
+      background: none; font-size: 13px; font-weight: 600; cursor: pointer;
+      transition: all 0.2s; letter-spacing: 1px;
+    }
+    .currency-btn.active { background: var(--black); color: #fff; border-color: var(--black); }
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1000px; margin: 0 auto; }
+    .pricing-card { background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.06); position: relative; }
+    .pricing-card .badge {
+      position: absolute; top: 16px; right: -8px;
+      background: var(--rose); color: #fff; font-size: 11px; font-weight: 700;
+      padding: 4px 14px; border-radius: 4px; letter-spacing: 1px; text-transform: uppercase;
+    }
+    .plan-photo {
+      height: 200px; background: linear-gradient(135deg, #c4937a 0%, #8a5a42 100%);
+      display: flex; align-items: flex-end;
+    }
+    .plan-photo-label {
+      background: var(--rose); width: 100%; padding: 16px 20px;
+      text-align: center;
+    }
+    .plan-photo-label h3 { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 2px; color: #fff; }
+    .plan-photo-label p { font-size: 11px; color: rgba(255,255,255,0.8); letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
+    .plan-body { padding: 28px 24px; text-align: center; }
+    .plan-price { font-family: 'Bebas Neue', sans-serif; font-size: 56px; line-height: 1; color: var(--black); }
+    .plan-price span { font-family: 'Figtree', sans-serif; font-size: 18px; font-weight: 400; color: var(--gray); }
+    .plan-subtitle { font-size: 11px; color: var(--rose); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin: 6px 0 8px; }
+    .plan-note { font-size: 12px; color: var(--gray); font-style: italic; margin-bottom: 20px; line-height: 1.5; }
+    .btn-join {
+      display: block; width: 100%; padding: 14px;
+      background: var(--rose); color: #fff; border: none; border-radius: 50px;
+      font-size: 14px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      cursor: pointer; transition: background 0.2s;
+    }
+    .btn-join:hover { background: var(--rose-dark); }
+    .plan-billing { font-size: 11px; color: var(--gray); margin-top: 12px; font-style: italic; }
+
+    /* ─── TESTIMONIALS ─────────────────────────── */
+    .testimonials { background: var(--cream); overflow: hidden; }
+    .testimonial-track { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; max-width: 1100px; margin: 0 auto; position: relative; }
+    .testimonial-card { text-align: center; padding: 16px; }
+    .testimonial-card h4 { font-weight: 700; font-size: 16px; margin-bottom: 16px; }
+    .testimonial-card p { font-size: 14px; color: #555; line-height: 1.8; font-style: italic; }
+    .testimonial-arrows { display: flex; justify-content: center; gap: 24px; margin-top: 40px; }
+    .arrow-btn {
+      width: 40px; height: 40px; border-radius: 50%; border: 1px solid #ccc;
+      background: none; font-size: 18px; cursor: pointer; display: flex;
+      align-items: center; justify-content: center; transition: all 0.2s;
+    }
+    .arrow-btn:hover { background: var(--black); color: #fff; border-color: var(--black); }
+
+    /* ─── MEET TRAINER ─────────────────────────── */
+    .trainer { background: #fff; }
+    .trainer-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 0; max-width: 1100px; margin: 0 auto; border-radius: 24px; overflow: hidden; box-shadow: 0 8px 48px rgba(0,0,0,0.08); }
+    .trainer-photo { background: linear-gradient(135deg, #d4b5a0 0%, #8a6550 100%); min-height: 560px; display: flex; align-items: center; justify-content: center; font-size: 14px; color: rgba(255,255,255,0.7); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+    .trainer-bio { padding: 60px 56px; display: flex; flex-direction: column; justify-content: center; }
+    .trainer-bio .eyebrow { font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--rose); margin-bottom: 8px; }
+    .trainer-bio h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 4vw, 56px); letter-spacing: 1px; line-height: 1; margin-bottom: 24px; }
+    .trainer-bio p { font-size: 15px; color: #555; line-height: 1.8; margin-bottom: 16px; }
+    .trainer-bio p strong { color: var(--black); }
+
+    /* ─── FOOTER ─────────────────────────────── */
+    footer { background: var(--black); color: #fff; padding: 60px 48px; }
+    .footer-signup { text-align: center; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 40px; }
+    .footer-signup h3 { font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 2px; margin-bottom: 8px; }
+    .footer-signup p { color: rgba(255,255,255,0.6); margin-bottom: 24px; }
+    .email-form { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .email-form input {
+      padding: 14px 24px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.08); color: #fff; font-size: 14px; width: 300px;
+      outline: none;
+    }
+    .email-form input::placeholder { color: rgba(255,255,255,0.4); }
+    .email-form button { padding: 14px 32px; border-radius: 50px; background: var(--rose); border: none; color: #fff; font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
+    .email-form button:hover { background: var(--rose-dark); }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+    .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; }
+    .footer-links { display: flex; gap: 24px; list-style: none; }
+    .footer-links a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+    .footer-links a:hover { color: #fff; }
+    .social-links { display: flex; gap: 16px; }
+    .social-icon {
+      width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2);
+      display: flex; align-items: center; justify-content: center; text-decoration: none;
+      font-size: 16px; color: rgba(255,255,255,0.7); transition: all 0.2s;
+    }
+    .social-icon:hover { background: var(--rose); border-color: var(--rose); color: #fff; }
+
+    /* ─── MOBILE MENU ─────────────────────────── */
+    .mobile-menu {
+      display: none; position: fixed; inset: 0; background: var(--cream); z-index: 99;
+      flex-direction: column; align-items: center; justify-content: center; gap: 32px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-family: 'Bebas Neue', sans-serif; font-size: 40px; letter-spacing: 2px; text-decoration: none; color: var(--black); }
+    .mobile-menu a:hover { color: var(--rose); }
+    .close-menu { position: absolute; top: 20px; right: 24px; font-size: 28px; background: none; border: none; cursor: pointer; }
+
+    /* ─── RESPONSIVE ───────────────────────────── */
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      section { padding: 60px 24px; }
+      .included-inner { grid-template-columns: 1fr; }
+      .app-mockup { height: 260px; }
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+      .before-after-grid { grid-template-columns: 1fr; max-width: 320px; }
+      .phone-grid { grid-template-columns: 1fr; max-width: 280px; }
+      .who-grid { grid-template-columns: 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .testimonial-track { grid-template-columns: 1fr; }
+      .trainer-inner { grid-template-columns: 1fr; }
+      .trainer-photo { min-height: 300px; }
+      .trainer-bio { padding: 36px 28px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">MAYA FITNESS</a>
+    <ul class="nav-links">
+      <li><a href="#included">Programs</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#trainer">About</a></li>
+      <li><a href="#testimonials">Results</a></li>
+    </ul>
+    <button class="nav-cta" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Join Now</button>
+    <button class="hamburger" onclick="document.querySelector('.mobile-menu').classList.add('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu">
+    <button class="close-menu" onclick="document.querySelector('.mobile-menu').classList.remove('open')">✕</button>
+    <a href="#included" onclick="document.querySelector('.mobile-menu').classList.remove('open')">Programs</a>
+    <a href="#pricing" onclick="document.querySelector('.mobile-menu').classList.remove('open')">Pricing</a>
+    <a href="#trainer" onclick="document.querySelector('.mobile-menu').classList.remove('open')">About</a>
+    <a href="#testimonials" onclick="document.querySelector('.mobile-menu').classList.remove('open')">Results</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <h1>SAY YES TO YOUR<br>DREAM BODY</h1>
+      <p>No more guesswork. No more failed diets.</p>
+      <a href="#pricing" class="btn-pill">I WANT MY DREAM BODY</a>
+    </div>
+  </section>
+
+  <!-- WHAT'S INCLUDED -->
+  <section class="included" id="included">
+    <h2 class="section-title">What's Included?</h2>
+    <div class="included-inner">
+      <div class="app-mockup">[ App Mockup Photo ]</div>
+      <div class="features-grid">
+        <div class="feature-item">
+          <div class="feature-icon">🏋️</div>
+          <p>customised home &amp; gym training plan</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🥗</div>
+          <p>personalized meal plan options</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">📈</div>
+          <p>programs for all levels</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">👨‍🍳</div>
+          <p>recipes for every taste</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🌿</div>
+          <p>vegan, veggie, low carb &amp; more</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">⚙️</div>
+          <p>in-app progress tracker</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">✉️</div>
+          <p>24/7 motivation email support</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">👥</div>
+          <p>private members community</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRANSFORMATIONS -->
+  <section class="transformations">
+    <div class="container">
+      <h2 class="section-title">500+ clients reshaped<br>in 6 months</h2>
+      <div class="before-after-grid">
+        <div class="ba-photo">Before / After</div>
+        <div class="ba-photo">Before / After</div>
+        <div class="ba-photo">Before / After</div>
+      </div>
+      <div class="carousel-dots">
+        <div class="dot active"></div><div class="dot"></div><div class="dot"></div>
+        <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      </div>
+      <div style="text-align:center; margin-bottom: 48px;">
+        <a href="#pricing" class="btn-pill btn-rose" style="color:#fff;">BE THE NEXT SUCCESS STORY</a>
+      </div>
+      <div class="phone-grid">
+        <div class="phone-card"><span>Before → After</span></div>
+        <div class="phone-card"><span>Before → After</span></div>
+        <div class="phone-card"><span>Before → After</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO IS THIS FOR -->
+  <section class="who">
+    <div class="container">
+      <h2 class="section-title">Who Is This For?</h2>
+      <div class="who-grid">
+        <div class="who-card">
+          <h3>Build Muscle</h3>
+          <p>You want to <strong>build as much muscle as possible</strong> and sculpt a strong, toned physique from the ground up.</p>
+        </div>
+        <div class="who-card">
+          <h3>Shred Fat</h3>
+          <p>You have <strong>fat to lose</strong> and want to <strong>shred fat as fast as possible</strong> while keeping your hard-earned muscle.</p>
+        </div>
+        <div class="who-card">
+          <h3>Body Recomp</h3>
+          <p>You want to <strong>build muscle and lose fat at the same time</strong> — a complete body transformation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <h2 class="section-title">Choose Your Plan</h2>
+      <div class="currency-tabs">
+        <button class="currency-btn active" onclick="setCurrency('USD', this)">USD</button>
+        <button class="currency-btn" onclick="setCurrency('AUD', this)">AUD</button>
+        <button class="currency-btn" onclick="setCurrency('GBP', this)">GBP</button>
+      </div>
+      <div class="pricing-grid">
+
+        <div class="pricing-card">
+          <div class="badge">SAVE 30%</div>
+          <div class="plan-photo">
+            <div class="plan-photo-label">
+              <h3>TRAINING + NUTRITION</h3>
+              <p>PAID 3 MONTHLY</p>
+            </div>
+          </div>
+          <div class="plan-body">
+            <div class="plan-price" id="price1">$97 <span>/ month</span></div>
+            <div class="plan-subtitle">LESS THAN $3.20 PER DAY</div>
+            <p class="plan-note">*Access included to ALL Maya Fitness Challenges!</p>
+            <button class="btn-join">JOIN NOW</button>
+            <p class="plan-billing" id="billing1">*$291 billed every 3 months*</p>
+          </div>
+        </div>
+
+        <div class="pricing-card">
+          <div class="plan-photo">
+            <div class="plan-photo-label">
+              <h3>TRAINING + NUTRITION</h3>
+              <p>PAID MONTHLY</p>
+            </div>
+          </div>
+          <div class="plan-body">
+            <div class="plan-price" id="price2">$127 <span>/ month</span></div>
+            <div class="plan-subtitle">LESS THAN $4.20 PER DAY</div>
+            <p class="plan-note">*Access included to ALL Maya Fitness Challenges!</p>
+            <button class="btn-join">JOIN NOW</button>
+            <p class="plan-billing" id="billing2">*$127 billed every month*</p>
+          </div>
+        </div>
+
+        <div class="pricing-card">
+          <div class="plan-photo">
+            <div class="plan-photo-label">
+              <h3>TRAINING + NUTRITION</h3>
+              <p>PAID WEEKLY</p>
+            </div>
+          </div>
+          <div class="plan-body">
+            <div class="plan-price" id="price3">$39 <span>/ week</span></div>
+            <div class="plan-subtitle">LESS THAN $5.60 PER DAY</div>
+            <p class="plan-note">*Access included to ALL Maya Fitness Challenges!</p>
+            <button class="btn-join">JOIN NOW</button>
+            <p class="plan-billing" id="billing3">*$39 billed every week*</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <h2 class="section-title">What Our Clients Say</h2>
+      <div class="testimonial-track">
+        <div class="testimonial-card">
+          <h4>Sarah M. – 28</h4>
+          <p>"This program took my training to the next level! I used to go to the gym without a plan, but now I feel confident every time I step in. The structured workouts kept me accountable, and I love how it mixes strength and volume. My glutes are ROUND and LIFTED and my core feels so much tighter. If you want real results, THIS is the program!"</p>
+        </div>
+        <div class="testimonial-card">
+          <h4>Lauren T. – 34</h4>
+          <p>"I was skeptical at first, but WOW. By week 4, I noticed my glutes looking fuller, my waist more defined, and my confidence through the roof! The workouts are straightforward but so effective, and the progression makes sure you never hit a plateau. I finally have a fitness routine that I love, and I feel amazing in my own skin."</p>
+        </div>
+        <div class="testimonial-card">
+          <h4>Emma J. – 41</h4>
+          <p>"I've always struggled with lower body strength, but this program changed that! The workouts are challenging yet doable, and I love how they balance glute growth with waist-slimming core work. My posture has improved, I feel firmer all over, and I finally have the confidence to wear tight dresses again. Best investment I've made in myself!"</p>
+        </div>
+      </div>
+      <div class="testimonial-arrows">
+        <button class="arrow-btn">←</button>
+        <button class="arrow-btn">→</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- MEET TRAINER -->
+  <section class="trainer" id="trainer">
+    <div class="trainer-inner">
+      <div class="trainer-photo">[ Trainer Photo ]</div>
+      <div class="trainer-bio">
+        <p class="eyebrow">Meet your trainer</p>
+        <h2>MAYA COHEN</h2>
+        <p>Hey, I'm Maya — founder of Maya Fitness and your go-to coach for <strong>building world-class glutes and a strong, confident body.</strong></p>
+        <p>With over 8 years in the fitness industry, I've helped hundreds of women transform their physiques and mindset with no-BS training and nutrition strategies that actually work.</p>
+        <p>I started Maya Fitness because I was sick of seeing women struggle with programs that don't deliver real results. <strong>Every program I create is built around science, consistency, and real progress.</strong></p>
+        <br>
+        <a href="#pricing" class="btn-pill btn-rose" style="display:inline-block; text-decoration:none; color:#fff;">START YOUR JOURNEY</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-signup">
+      <h3>GET A FREE WORKOUT GUIDE</h3>
+      <p>Drop your email and I'll send you my top 5 glute-building exercises.</p>
+      <div class="email-form">
+        <input type="email" placeholder="Your email address" />
+        <button>SIGN ME UP!</button>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-logo">MAYA FITNESS</div>
+      <ul class="footer-links">
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <div class="social-links">
+        <a href="#" class="social-icon" aria-label="Instagram">📸</a>
+        <a href="#" class="social-icon" aria-label="TikTok">🎵</a>
+        <a href="#" class="social-icon" aria-label="YouTube">▶️</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const prices = {
+      USD: { p1: '$97 <span>/ month</span>',  b1: '*$291 billed every 3 months*', p2: '$127 <span>/ month</span>', b2: '*$127 billed every month*', p3: '$39 <span>/ week</span>',  b3: '*$39 billed every week*' },
+      AUD: { p1: '$139 <span>/ month</span>', b1: '*$419 AUD billed every 3 months*', p2: '$177 <span>/ month</span>', b2: '*$177 AUD billed every month*', p3: '$59 <span>/ week</span>',  b3: '*$59 AUD billed every week*' },
+      GBP: { p1: '£75 <span>/ month</span>',  b1: '*£225 billed every 3 months*', p2: '£99 <span>/ month</span>',  b2: '*£99 billed every month*', p3: '£30 <span>/ week</span>',  b3: '*£30 billed every week*' },
+    };
+
+    function setCurrency(cur, btn) {
+      document.querySelectorAll('.currency-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const d = prices[cur];
+      document.getElementById('price1').innerHTML = d.p1;
+      document.getElementById('billing1').textContent = d.b1;
+      document.getElementById('price2').innerHTML = d.p2;
+      document.getElementById('billing2').textContent = d.b2;
+      document.getElementById('price3').innerHTML = d.p3;
+      document.getElementById('billing3').textContent = d.b3;
+    }
+  </script>
+
+</body>
+</html>
